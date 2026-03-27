@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react'
 import type { ProductColor, ProductType, Size } from '../types'
 
 export type FiltersState = {
@@ -66,18 +65,26 @@ export default function FiltersSidebar({
   }
 
   return (
-    <aside className="filters" aria-label="Filters">
-      <div className="filtersHeader">
-        <div className="filtersTitle">Filters</div>
-        <button className="linkBtn" type="button" onClick={reset}>
+    <aside className="rounded-xl border border-slate-200 bg-white p-4" aria-label="Filters">
+      <div className="flex items-center justify-between pb-3">
+        <div className="text-sm font-bold uppercase tracking-wide text-slate-900">
+          Filters
+        </div>
+        <button
+          className="text-xs font-semibold uppercase tracking-wide text-blue-700 hover:text-blue-800"
+          type="button"
+          onClick={reset}
+        >
           Reset
         </button>
       </div>
 
-      <details className="filterGroup" open>
-        <summary className="filterSummary">Product type</summary>
-        <div className="filterBody">
-          <label className="checkRow">
+      <details className="border-t border-slate-200 py-3" open>
+        <summary className="cursor-pointer list-none text-xs font-bold uppercase tracking-wide text-slate-800">
+          Product type
+        </summary>
+        <div className="pt-3">
+          <label className="flex items-center gap-2 py-1 text-sm text-slate-600">
             <input
               type="checkbox"
               checked={allTypesChecked}
@@ -86,7 +93,7 @@ export default function FiltersSidebar({
             <span>All</span>
           </label>
           {productTypes.map((type) => (
-            <label key={type} className="checkRow">
+            <label key={type} className="flex items-center gap-2 py-1 text-sm text-slate-600">
               <input
                 type="checkbox"
                 checked={state.selectedTypes.includes(type)}
@@ -98,13 +105,16 @@ export default function FiltersSidebar({
         </div>
       </details>
 
-      <details className="filterGroup" open>
-        <summary className="filterSummary">Price</summary>
-        <div className="filterBody">
-          <div className="priceInputs">
-            <label className="miniInput">
-              <span>$</span>
+      <details className="border-t border-slate-200 py-3" open>
+        <summary className="cursor-pointer list-none text-xs font-bold uppercase tracking-wide text-slate-800">
+          Price
+        </summary>
+        <div className="pt-3">
+          <div className="flex gap-2">
+            <label className="inline-flex w-full items-center gap-1 rounded-md border border-slate-200 px-2 py-1.5">
+              <span className="text-xs text-slate-500">$</span>
               <input
+                className="w-full bg-transparent text-xs font-semibold text-slate-800 outline-none"
                 type="number"
                 inputMode="numeric"
                 value={state.priceMin}
@@ -113,9 +123,10 @@ export default function FiltersSidebar({
                 onChange={(e) => updatePrice(Number(e.target.value), state.priceMax)}
               />
             </label>
-            <label className="miniInput">
-              <span>$</span>
+            <label className="inline-flex w-full items-center gap-1 rounded-md border border-slate-200 px-2 py-1.5">
+              <span className="text-xs text-slate-500">$</span>
               <input
+                className="w-full bg-transparent text-xs font-semibold text-slate-800 outline-none"
                 type="number"
                 inputMode="numeric"
                 value={state.priceMax}
@@ -126,9 +137,9 @@ export default function FiltersSidebar({
             </label>
           </div>
 
-          <div className="rangeWrap" aria-label="Price range">
+          <div className="relative mt-3 h-6" aria-label="Price range">
             <input
-              className="range"
+              className="pointer-events-none absolute inset-0 w-full appearance-none bg-transparent [&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-slate-200 [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:mt-[-4px] [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-slate-800"
               type="range"
               min={priceMinLimit}
               max={priceMaxLimit}
@@ -136,7 +147,7 @@ export default function FiltersSidebar({
               onChange={(e) => updatePrice(Number(e.target.value), state.priceMax)}
             />
             <input
-              className="range"
+              className="pointer-events-none absolute inset-0 w-full appearance-none bg-transparent [&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-transparent [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:mt-[-4px] [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-slate-800"
               type="range"
               min={priceMinLimit}
               max={priceMaxLimit}
@@ -147,43 +158,43 @@ export default function FiltersSidebar({
         </div>
       </details>
 
-      <details className="filterGroup" open>
-        <summary className="filterSummary">Color</summary>
-        <div className="filterBody">
-          <div className="colorRow">
+      <details className="border-t border-slate-200 py-3" open>
+        <summary className="cursor-pointer list-none text-xs font-bold uppercase tracking-wide text-slate-800">
+          Color
+        </summary>
+        <div className="pt-3">
+          <div className="flex flex-wrap gap-2">
             {colors.map((c) => (
               <button
                 key={c.hex}
-                className="colorDot"
+                className={`h-5 w-5 rounded-full border border-slate-200 ${
+                  colorToClass(c.hex)
+                } ${state.selectedColors.includes(c.hex) ? 'ring-2 ring-slate-900 ring-offset-2' : ''}`}
                 type="button"
                 aria-label={c.name}
                 aria-pressed={state.selectedColors.includes(c.hex)}
                 onClick={() => toggleColor(c.hex)}
-                style={
-                  {
-                    backgroundColor: c.hex,
-                    outlineColor: state.selectedColors.includes(c.hex)
-                      ? '#111827'
-                      : 'transparent',
-                  } as CSSProperties
-                }
               />
             ))}
           </div>
         </div>
       </details>
 
-      <details className="filterGroup" open>
-        <summary className="filterSummary">Size</summary>
-        <div className="filterBody">
-          <div className="sizeGrid">
+      <details className="border-t border-slate-200 py-3" open>
+        <summary className="cursor-pointer list-none text-xs font-bold uppercase tracking-wide text-slate-800">
+          Size
+        </summary>
+        <div className="pt-3">
+          <div className="grid grid-cols-4 gap-2">
             {sizes.map((s) => (
               <button
                 key={s}
                 type="button"
-                className={
-                  state.selectedSizes.includes(s) ? 'sizeBtn sizeBtnOn' : 'sizeBtn'
-                }
+                className={`rounded-md border px-0 py-2 text-xs font-semibold ${
+                  state.selectedSizes.includes(s)
+                    ? 'border-blue-700 bg-blue-700 text-white'
+                    : 'border-slate-200 bg-white text-slate-700'
+                }`}
                 onClick={() => toggleSize(s)}
                 aria-pressed={state.selectedSizes.includes(s)}
               >
@@ -195,4 +206,30 @@ export default function FiltersSidebar({
       </details>
     </aside>
   )
+}
+
+function colorToClass(hex: string) {
+  switch (hex.toLowerCase()) {
+    case '#111827':
+    case '#0f172a':
+      return 'bg-slate-900'
+    case '#9ca3af':
+    case '#4b5563':
+    case '#d1d5db':
+      return 'bg-slate-400'
+    case '#ffffff':
+    case '#f3f4f6':
+    case '#e5e7eb':
+      return 'bg-slate-100'
+    case '#7dd3c7':
+      return 'bg-emerald-300'
+    case '#93c5fd':
+      return 'bg-blue-300'
+    case '#e7d3b0':
+      return 'bg-amber-200'
+    case '#1e3a8a':
+      return 'bg-blue-900'
+    default:
+      return 'bg-slate-300'
+  }
 }

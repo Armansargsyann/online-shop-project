@@ -11,7 +11,7 @@ export default function ProductGrid({
   onToggleWish: (id: string) => void
 }) {
   return (
-    <div className="grid" role="list">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
       {products.map((p) => (
         <div key={p.id} role="listitem">
           <ProductCard
@@ -24,4 +24,3 @@ export default function ProductGrid({
     </div>
   )
 }
-

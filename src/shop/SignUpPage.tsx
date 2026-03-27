@@ -18,30 +18,65 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="shop flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col bg-slate-100 text-slate-900">
       <TopBar />
-      <div className="flex-1 flex flex-col items-center justify-center bg-gray-50 p-4">
-        <h1 className="text-3xl font-bold mb-8 text-gray-800">Create an Account</h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 w-full max-w-md">
+      <div className="flex flex-1 flex-col items-center justify-center p-4">
+        <h1 className="mb-8 text-3xl font-bold text-slate-800">Create an Account</h1>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full max-w-md rounded-xl border border-slate-200 bg-white p-8 shadow-sm"
+        >
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-            <input type="text" {...register('fullName')} placeholder="John Doe" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent" />
+            <label className="mb-2 block text-sm font-medium text-slate-700">Full Name</label>
+            <input
+              type="text"
+              {...register('fullName')}
+              placeholder="John Doe"
+              className="w-full rounded-lg border border-slate-300 p-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-            <input type="email" {...register('email')} placeholder="you@example.com" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent" />
+            <label className="mb-2 block text-sm font-medium text-slate-700">
+              Email Address
+            </label>
+            <input
+              type="email"
+              {...register('email')}
+              placeholder="you@example.com"
+              className="w-full rounded-lg border border-slate-300 p-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
-            <input type="password" {...register('password')} placeholder="••••••••" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent" />
+            <label className="mb-2 block text-sm font-medium text-slate-700">Password</label>
+            <input
+              type="password"
+              {...register('password')}
+              placeholder="••••••••"
+              className="w-full rounded-lg border border-slate-300 p-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
           </div>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-            <input type="password" {...register('confirmPassword')} placeholder="••••••••" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent" />
+            <label className="mb-2 block text-sm font-medium text-slate-700">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              {...register('confirmPassword')}
+              placeholder="••••••••"
+              className="w-full rounded-lg border border-slate-300 p-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
           </div>
-          <button type="submit" className="w-full bg-gray-800 text-white font-semibold p-3 rounded-lg hover:bg-gray-900 transition-colors duration-200">Create Account</button>
-          <p className="mt-6 text-center text-sm text-gray-600">
-            Already have an account? <Link to="/signin" className="text-gray-800 font-semibold hover:underline">Sign In</Link>
+          <button
+            type="submit"
+            className="w-full rounded-lg bg-blue-700 p-3 font-semibold text-white transition-colors duration-200 hover:bg-blue-800"
+          >
+            Create Account
+          </button>
+          <p className="mt-6 text-center text-sm text-slate-600">
+            Already have an account?{' '}
+            <Link to="/signin" className="font-semibold text-blue-700 hover:underline">
+              Sign In
+            </Link>
           </p>
         </form>
       </div>
