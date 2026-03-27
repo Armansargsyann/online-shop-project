@@ -1,0 +1,27 @@
+import type { Product } from '../types'
+import ProductCard from './ProductCard'
+
+export default function ProductGrid({
+  products,
+  wishlist,
+  onToggleWish,
+}: {
+  products: Product[]
+  wishlist: Set<string>
+  onToggleWish: (id: string) => void
+}) {
+  return (
+    <div className="grid" role="list">
+      {products.map((p) => (
+        <div key={p.id} role="listitem">
+          <ProductCard
+            product={p}
+            wished={wishlist.has(p.id)}
+            onToggleWish={onToggleWish}
+          />
+        </div>
+      ))}
+    </div>
+  )
+}
+
